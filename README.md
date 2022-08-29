@@ -4,13 +4,13 @@
 ## Description  
 >A web application that allows you to post and send journas to other users anonymously.
 ##  Live Link  
->[View Site](https://hood-mn.herokuapp.com)  to visit the site
+>[View Site](https://journals-mn.herokuapp.com/)  to visit the site
   
 
 ## User Story  
 * Sign in to the application to start using.
 * Post  a journal
-* Recive journals from other user via email
+* Recieve journals from other user via email
     
 ## Setup and Installation  
 To get the project .......  
