@@ -67,16 +67,16 @@ WSGI_APPLICATION = 'journals.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 if MODE == 'dev':
-    DATABASES = {
+     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': str(os.getenv("DB_NAME")),
+            'USER': str(os.getenv("DB_USER")),
+            'PASSWORD': str(os.getenv("DB_PASSWORD")),
+            'HOST': str(os.getenv("DB_HOST")),
+            'PORT': os.getenv("DB_sPORT")
         }
-    }
+     }
 else:
     DATABASES = {
        'default': dj_database_url.config( default=str(os.getenv('DATABASE_URL')))
