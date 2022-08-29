@@ -7,6 +7,9 @@ name = "pypi"
 django = "*"
 python-dotenv = "*"
 psycopg2 = "*"
+fontawesomefree = "*"
+schedule = "*"
+awsebcli = "*"
 
 [dev-packages]
 autopep8 = "*"

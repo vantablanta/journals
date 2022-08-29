@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -43,7 +44,7 @@ ROOT_URLCONF = 'journals.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -109,6 +110,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+# EMAIL CONFIGS 
+EMAIL_USE_TLS = True
+EMAIL_HOST= str(os.getenv('EMAIL_HOST'))
+EMAIL_PORT= int(os.getenv('EMAIL_PORT'))
+EMAIL_HOST_USER= str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD= str(os.getenv('EMAIL_HOST_PASSWORD'))
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

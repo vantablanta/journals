@@ -1,0 +1,47 @@
+{%load static%}
+<header class="header-area header-sticky" data-wow-duration="0.75s" data-wow-delay="0s">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a href="{%url 'home' %}" class="logo">
+            <h1 class="pt-4 gradient-button">Journal</h1>
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            <li class="scroll-to-section"><a href="{%url 'home' %}">Home</a></li>
+
+
+            <!-- DELETE THIS !! -->
+            <li class="scroll-to-section"><a href="{%url 'journals' %}">Journals</a></li>
+            <!-- DELETE THIS !! -->
+
+            {%if request.user.is_authenticated%}
+            <li class="scroll-to-section"><a href="">Profile</a></li>
+            <li>
+              <div class="gradient-button button-hover"><a href="{%url 'logout' %}">
+                  <i class="fa fa-sign-in-alt pe-1"></i>Logout</a>
+              </div>
+            </li>
+            {%else%}
+            <li class="scroll-to-section"><a href="{%url 'login' %}">Login</a></li>
+            <li>
+              <div class="gradient-button button-hover"><a href="{%url 'signup' %}">
+                  <i class="fa fa-sign-in-alt pe-1"></i>Get Started</a>
+              </div>
+            </li>
+            {%endif%}
+          </ul>
+          <!-- ***** Menu End ***** -->
+
+
+          <a class='menu-trigger'>
+            <span>Menu</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
