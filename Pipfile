@@ -12,6 +12,9 @@ awsebcli = "*"
 celery = "*"
 django-celery-beat = "*"
 psycopg2-binary = "*"
+gunicorn = "*"
+django-heroku = "*"
+dj-database-url = "*"
 
 [dev-packages]
 autopep8 = "*"

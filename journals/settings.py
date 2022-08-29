@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import django_heroku
+import dj_database_url
 
 env_path = Path('.')/'.env'
 load_dotenv(dotenv_path=env_path)
@@ -13,7 +15,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+MODE = 'dev'
 ALLOWED_HOSTS = ['journals-app-dev.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 
@@ -31,6 +33,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,7 +66,7 @@ WSGI_APPLICATION = 'journals.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if 'RDS_DB_NAME' in os.environ:
+if MODE == 'dev':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -75,16 +78,12 @@ if 'RDS_DB_NAME' in os.environ:
         }
     }
 else:
-        DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': str(os.getenv("DB_NAME")),
-            'USER': str(os.getenv("DB_USER")),
-            'PASSWORD': str(os.getenv("DB_PASSWORD")),
-            'HOST': str(os.getenv("DB_HOST")),
-            'PORT': os.getenv("DB_sPORT")
-        }
+    DATABASES = {
+       'default': dj_database_url.config( default=str(os.getenv('DATABASE_URL')))
     }
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -123,6 +122,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 
 # EMAIL CONFIGS 
@@ -141,3 +143,5 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
