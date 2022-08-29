@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = "*"
 python-dotenv = "*"
-psycopg2 = "*"
 fontawesomefree = "*"
 schedule = "*"
 awsebcli = "*"
