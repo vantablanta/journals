@@ -14,7 +14,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['journals-dev.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['journals-dev.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -62,17 +62,28 @@ WSGI_APPLICATION = 'journals.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': str(os.getenv("DB_NAME")),
-        'USER': str(os.getenv("DB_USER")),
-        'PASSWORD': str(os.getenv("DB_PASSWORD")),
-        'HOST': str(os.getenv("DB_HOST")),
-        'PORT': os.getenv("DB_sPORT")
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': str(os.getenv("DB_NAME")),
+            'USER': str(os.getenv("DB_USER")),
+            'PASSWORD': str(os.getenv("DB_PASSWORD")),
+            'HOST': str(os.getenv("DB_HOST")),
+            'PORT': os.getenv("DB_sPORT")
+        }
+    }
 
 
 # Password validation
@@ -121,6 +132,8 @@ EMAIL_HOST_USER= str(os.getenv('EMAIL_HOST_USER'))
 EMAIL_HOST_PASSWORD= str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
