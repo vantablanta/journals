@@ -14,12 +14,7 @@
             <li class="scroll-to-section"><a href="{%url 'home' %}">Home</a></li>
 
 
-            <!-- DELETE THIS !! -->
-            <li class="scroll-to-section"><a href="{%url 'journals' %}">Journals</a></li>
-            <!-- DELETE THIS !! -->
-
             {%if request.user.is_authenticated%}
-            <li class="scroll-to-section"><a href="">Profile</a></li>
             <li>
               <div class="gradient-button button-hover"><a href="{%url 'logout' %}">
                   <i class="fa fa-sign-in-alt pe-1"></i>Logout</a>

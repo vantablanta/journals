@@ -10,6 +10,8 @@ psycopg2 = "*"
 fontawesomefree = "*"
 schedule = "*"
 awsebcli = "*"
+celery = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 autopep8 = "*"

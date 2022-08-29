@@ -11,6 +11,7 @@ from django.utils import timezone
 import schedule
 import time
 from .models import Journals
+from django.conf import settings
 # Create your views here.
 
 def home(request):
@@ -26,6 +27,7 @@ def home(request):
             profile = Profile.objects.get(owner = user)
             journal = Journals.objects.create(body = body, posted_by = profile)
             journal.save()
+            send_journals(request)
             return render(request, 'app/success.html', ctx)
         else:
             print("Error Posting Journal")
@@ -79,38 +81,18 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-
 def send_journals(request):
-    ctx ={}
-
-    # GET ALL THE JOURNALS 
-    # time_24_hours_ago = datetime.datetime.now() - datetime.timedelta(hours=1)
-    # print(time_24_hours_ago)
-    # journals = Journals.objects.filter(date_posted = time_24_hours_ago)
-    # for journal in journals:
-    #     """"""
-    # FILTER EMAILS BY ONES POSTED IN 24HRS 
     journals = Journals.objects.all() 
-    users  = User.objects.all()
-
-
-    timestamp = datetime.time(20,20,46, 0)
-    print(timestamp)
 
     for journal in journals:
         emails = journal.posted_by.owner.email
    
         messages = journal.body
         subject  = "New Journal Entry."
-        sender = 'michellenjeri54@gmail.com'
-    
+        sender = settings.EMAIL_HOST_USER
         send_mail(subject, messages, sender, [emails])
 
-        print("email")
-
-    # REMOVE JOURNAL OWNER FROM EMAIL LIST 
-
-    return render(request, "app/journals.html", ctx)
+    return redirect("home")
 
 
 
