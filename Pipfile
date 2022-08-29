@@ -12,6 +12,7 @@ schedule = "*"
 awsebcli = "*"
 celery = "*"
 django-celery-beat = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 autopep8 = "*"
