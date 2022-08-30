@@ -8,7 +8,7 @@ from django.conf import settings
 def send_journal():
     try:
         from .models import Journals
-        time_threshold = datetime.now() - datetime.timedelta(hours=1)
+        time_threshold = datetime.now() - datetime.timedelta(hours=24)
         journals = Journals.objects.filter(date_posted__gte=time_threshold)
         for journal in journals:
             emails = journal.posted_by.owner.email
