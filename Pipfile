@@ -15,6 +15,7 @@ psycopg2-binary = "*"
 gunicorn = "*"
 django-heroku = "*"
 dj-database-url = "*"
+redis = "*"
 
 [dev-packages]
 autopep8 = "*"
