@@ -21,5 +21,5 @@ class JournalTest(TestCase):
 
     def test_save_method(self):
         self.new_journal.save()
-        hood = Journals.objects.all()
-        self.assertTrue(len(hood) > 0 )
+        journals = Journals.objects.all()
+        self.assertTrue(len(journals) > 0 )
