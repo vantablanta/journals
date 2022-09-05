@@ -54,7 +54,8 @@ Open the application on your browser `127.0.0.1:8000`.
   
 * [Python3.8](https://www.python.org/)  
 * [Django 4.0](https://docs.djangoproject.com/en/2.2/)  
-* [Celery]
+* [Celery]()
+* [AWS]()
 * [Heroku](https://heroku.com)  
   
   
